@@ -27,7 +27,6 @@ func mergeWithBeamFlags(config any) {
 			usage, _ := field.Tag("usage")
 			flag.CommandLine.Var(field, name, usage)
 		}
-
 	}
 }
 

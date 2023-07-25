@@ -23,7 +23,7 @@ type Config struct {
 		AutoscalingAlgorithm             string   `flag:"autoscaling_algorithm" env:"BEAM_AUTOSCALING_ALGORITHM"`
 		BeamStrict                       bool     `flag:"beam_strict" env:"BEAM_STRICT"`
 		ControlEndpoint                  string   `flag:"control_endpoint" env:"BEAM_CONTROL_ENDPOINT"`
-		CpuProfiling                     string   `flag:"cpu_profiling" env:"BEAM_CPU_PROFILING"`
+		CPUProfiling                     string   `flag:"cpu_profiling" env:"BEAM_CPU_PROFILING"`
 		DataflowEndpoint                 string   `flag:"dataflow_endpoint" env:"BEAM_DATAFLOW_ENDPOINT"`
 		DataflowWorkerJar                string   `flag:"dataflow_worker_jar" env:"BEAM_DATAFLOW_WORKER_JAR"`
 		DiskSizeGb                       int      `flag:"disk_size_gb" env:"BEAM_DISK_SIZE_GB"`
@@ -34,12 +34,12 @@ type Config struct {
 		EnvironmentType                  string   `flag:"environment_type" env:"BEAM_ENVIRONMENT_TYPE"`
 		ExecuteAsync                     bool     `flag:"execute_async" env:"BEAM_EXECUTE_ASYNC"`
 		Experiments                      string   `flag:"experiments"`
-		Id                               string   `flag:"id"`
+		ID                               string   `flag:"id"`
 		JobName                          string   `flag:"job_name" env:"BEAM_JOB_NAME"`
 		Labels                           string   `flag:"labels"`
 		LoggingEndpoint                  string   `flag:"logging_endpoint" env:"BEAM_LOGGING_ENDPOINT"`
 		MaxNumWorkers                    int      `flag:"max_num_workers" env:"BEAM_MAX_NUM_WORKERS"`
-		MinCpuPlatform                   string   `flag:"min_cpu_platform" env:"BEAM_MIN_CPU_PLATFORM"`
+		MinCPUPlatform                   string   `flag:"min_cpu_platform" env:"BEAM_MIN_CPU_PLATFORM"`
 		Network                          string   `flag:"network"`
 		NoUsePublicIps                   bool     `flag:"no_use_public_ips" env:"BEAM_NO_USE_PUBLIC_IPS"`
 		NumWorkers                       int      `flag:"num_workers" env:"BEAM_NUM_WORKERS"`
