@@ -6,7 +6,7 @@ require (
 	github.com/apache/beam/sdks/v2 v2.49.0
 	github.com/arquivei/go-app v1.1.0
 	github.com/omeid/uconfig v1.2.0
-	github.com/rs/zerolog v1.29.1
+	github.com/rs/zerolog v1.30.0
 )
 
 require (
