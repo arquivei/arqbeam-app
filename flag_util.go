@@ -1,4 +1,4 @@
-package beamapp
+package app
 
 import (
 	"flag"
@@ -51,6 +51,6 @@ func overwriteFlag(flg *flag.Flag, config any, field flat.Field) {
 			Str("config_name", field.Name()).
 			Str("flag_name", flg.Name).
 			Str("flag_value", v).
-			Msg("[beamapp] Set beam flag.")
+			Msg("[arqbeam] Set beam flag.")
 	}
 }

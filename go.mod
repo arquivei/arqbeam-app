@@ -1,4 +1,4 @@
-module github.com/arquivei/beamapp
+module github.com/arquivei/arqbeam-app
 
 go 1.20
 

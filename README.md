@@ -1,6 +1,6 @@
-# beamapp
+# arqbeam-app
 
-An Apache Bream application wrapper using [go-app](https://github.com/arquivei/go-app).
+An Apache Beam application wrapper using [go-app](https://github.com/arquivei/go-app).
 
 This further extends go-app project to create Apache Beam applications.
 
@@ -14,13 +14,13 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/arquivei/beamapp"
+	"github.com/arquivei/arqbeam"
 )
 
 var (
 	version = "development"
 	config struct {
-		beamapp.Config
+		arqbeam.Config
 		YourCustomConfig string
 		SomeSecretConfig int           `secret:"true"`
 		Timeout          time.Duration `default:"3m"`
@@ -28,15 +28,15 @@ var (
 )
 
 func main() {
-	beamapp.Bootstrap(version, &config)
+	arqbeam.Bootstrap(version, &config)
 
 	p := getPipeline()
 
-	beamapp.Run(p)
+	arqbeam.Run(p)
 }
 
 ```
 
-All Apache Beam flags are mapped to the config struct by embedding `beamapp.Config`. Use `-h` to see all values and their default values.
+All Apache Beam flags are mapped to the config struct by embedding `arqbeam.Config`. Use `-h` to see all values and their default values.
 
 Comments, discussions, issues and pull-requests are welcomed.

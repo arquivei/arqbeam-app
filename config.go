@@ -1,4 +1,4 @@
-package beamapp
+package app
 
 import (
 	"github.com/arquivei/go-app"

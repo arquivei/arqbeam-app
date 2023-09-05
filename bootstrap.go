@@ -1,4 +1,4 @@
-package beamapp
+package app
 
 import (
 	"context"
@@ -33,11 +33,11 @@ func Run(p *beam.Pipeline) {
 	app.RunAndWait(func(ctx context.Context) error {
 		err := beamx.Run(ctx, p)
 		if err != nil {
-			log.Error().Err(err).Msg("[beamapp] Pipeline failed.")
+			log.Error().Err(err).Msg("[arqbeam] Pipeline failed.")
 
 			return err
 		}
-		log.Info().Msg("[beamapp] Pipeline finished.")
+		log.Info().Msg("[arqbeam] Pipeline finished.")
 
 		return nil
 	})
@@ -47,14 +47,14 @@ func RunWithMetrics(p *beam.Pipeline) {
 	app.RunAndWait(func(ctx context.Context) error {
 		results, err := beamx.RunWithMetrics(ctx, p)
 		if err != nil {
-			log.Error().Err(err).Msg("[beamapp] Pipeline failed.")
+			log.Error().Err(err).Msg("[arqbeam] Pipeline failed.")
 
 			return err
 		}
 		log.Info().
 			Str("job_id", results.JobID()).
 			Interface("metrics", results.Metrics().AllMetrics()).
-			Msg("[beamapp] Pipeline finished.")
+			Msg("[arqbeam] Pipeline finished.")
 
 		return nil
 	})
