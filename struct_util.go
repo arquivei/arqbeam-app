@@ -1,4 +1,4 @@
-package beamapp
+package app
 
 import (
 	"fmt"
