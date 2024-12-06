@@ -59,3 +59,23 @@ func RunWithMetrics(p *beam.Pipeline) {
 		return nil
 	})
 }
+
+func RunWithCallback(p *beam.Pipeline, onSuccess func(), onFailure func(error)) {
+	app.RunAndWait(func(ctx context.Context) error {
+		err := beamx.Run(ctx, p)
+		if err != nil {
+			log.Error().Err(err).Msg("[arqbeam] Pipeline failed.")
+			if onFailure != nil {
+				log.Info().Msg("[arqbeam] Calling onFailure Callback.")
+				onFailure(err)
+			}
+			return err
+		}
+		log.Info().Msg("[arqbeam] Pipeline finished.")
+		if onSuccess != nil {
+			log.Info().Msg("[arqbeam] Calling onSuccess Callback.")
+			onSuccess()
+		}
+		return nil
+	})
+}
