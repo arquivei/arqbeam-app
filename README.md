@@ -14,13 +14,13 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/arquivei/arqbeam"
+	"github.com/arquivei/arqbeam-app"
 )
 
 var (
 	version = "development"
 	config struct {
-		arqbeam.Config
+		app.Config
 		YourCustomConfig string
 		SomeSecretConfig int           `secret:"true"`
 		Timeout          time.Duration `default:"3m"`
@@ -28,15 +28,15 @@ var (
 )
 
 func main() {
-	arqbeam.Bootstrap(version, &config)
+	app.Bootstrap(version, &config)
 
 	p := getPipeline()
 
-	arqbeam.Run(p)
+	app.Run(p)
 }
 
 ```
 
-All Apache Beam flags are mapped to the config struct by embedding `arqbeam.Config`. Use `-h` to see all values and their default values.
+All Apache Beam flags are mapped to the config struct by embedding `app.Config`. Use `-h` to see all values and their default values.
 
 Comments, discussions, issues and pull-requests are welcomed.
