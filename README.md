@@ -14,7 +14,7 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/arquivei/arqbeam"
+	arqbeam "github.com/arquivei/arqbeam-app"
 )
 
 var (
