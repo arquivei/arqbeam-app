@@ -10,6 +10,22 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
+type OnSuccessHook func()
+type OnFailureHook func(error)
+
+var (
+	onSuccess []OnSuccessHook
+	onFailure []OnFailureHook
+)
+
+func RegisterOnSucessHooks(hooks ...OnSuccessHook) {
+	onSuccess = append(onSuccess, hooks...)
+}
+
+func RegisterOnFailureHooks(hooks ...OnFailureHook) {
+	onFailure = append(onFailure, hooks...)
+}
+
 // Bootstrap will set flags for the beam package. The values will be get from
 // config struct so this function should be called only after `app.SetupConfig(&config)`.
 func Bootstrap(appVersion string, config BeamConfiger) {
@@ -34,10 +50,15 @@ func Run(p *beam.Pipeline) {
 		err := beamx.Run(ctx, p)
 		if err != nil {
 			log.Error().Err(err).Msg("[arqbeam] Pipeline failed.")
-
+			for _, hook := range onFailure{
+				hook(err)
+			}
 			return err
 		}
 		log.Info().Msg("[arqbeam] Pipeline finished.")
+		for _, hook := range onSuccess{
+			hook()
+		}
 
 		return nil
 	})
@@ -56,26 +77,6 @@ func RunWithMetrics(p *beam.Pipeline) {
 			Interface("metrics", results.Metrics().AllMetrics()).
 			Msg("[arqbeam] Pipeline finished.")
 
-		return nil
-	})
-}
-
-func RunWithCallback(p *beam.Pipeline, onSuccess func(), onFailure func(error)) {
-	app.RunAndWait(func(ctx context.Context) error {
-		err := beamx.Run(ctx, p)
-		if err != nil {
-			log.Error().Err(err).Msg("[arqbeam] Pipeline failed.")
-			if onFailure != nil {
-				log.Info().Msg("[arqbeam] Calling onFailure Callback.")
-				onFailure(err)
-			}
-			return err
-		}
-		log.Info().Msg("[arqbeam] Pipeline finished.")
-		if onSuccess != nil {
-			log.Info().Msg("[arqbeam] Calling onSuccess Callback.")
-			onSuccess()
-		}
 		return nil
 	})
 }
