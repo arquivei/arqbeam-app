@@ -18,7 +18,7 @@ var (
 	onFailure []OnFailureHook
 )
 
-func RegisterOnSucessHooks(hooks ...OnSuccessHook) {
+func RegisterOnSuccessHooks(hooks ...OnSuccessHook) {
 	onSuccess = append(onSuccess, hooks...)
 }
 
