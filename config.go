@@ -26,6 +26,7 @@ type Config struct {
 		CPUProfiling                     string   `flag:"cpu_profiling" env:"BEAM_CPU_PROFILING"`
 		DataflowEndpoint                 string   `flag:"dataflow_endpoint" env:"BEAM_DATAFLOW_ENDPOINT"`
 		DataflowWorkerJar                string   `flag:"dataflow_worker_jar" env:"BEAM_DATAFLOW_WORKER_JAR"`
+		DataflowServiceOptions           string   `flag:"dataflow_service_options" env:"BEAM_DATAFLOW_SERVICE_OPTIONS"`
 		DiskSizeGb                       int      `flag:"disk_size_gb" env:"BEAM_DISK_SIZE_GB"`
 		DotFile                          string   `flag:"dot_file" env:"BEAM_DOT_FILE"`
 		DryRun                           bool     `flag:"dry_run" env:"BEAM_DRY_RUN"`
