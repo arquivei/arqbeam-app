@@ -60,6 +60,7 @@ type Config struct {
 		Subnetwork                       string   `flag:"subnetwork"`
 		TeardownPolicy                   string   `flag:"teardown_policy" env:"BEAM_TEARDOWN_POLICY"`
 		TempLocation                     string   `flag:"temp_location" env:"BEAM_TEMP_LOCATION"`
+		WithMetrics                      bool     `flag:"with-metrics" env:"BEAM_WITH_METRICS"`
 		Worker                           bool     `flag:"worker"`
 		WorkerBinary                     string   `flag:"worker_binary" env:"BEAM_WORKER_BINARY"`
 		WorkerHarnessContainerImage      string   `flag:"worker_harness_container_image" env:"BEAM_WORKER_HARNESS_CONTAINER_IMAGE" default:"apache/beam_go_sdk:latest"`

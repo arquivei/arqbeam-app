@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/omeid/uconfig/flat"
+	"github.com/arquivei/arqbeam-app/internal/thirdparty/uconfig/flat"
 	"github.com/rs/zerolog/log"
 )
 
@@ -51,6 +51,6 @@ func overwriteFlag(flg *flag.Flag, config any, field flat.Field) {
 			Str("config_name", field.Name()).
 			Str("flag_name", flg.Name).
 			Str("flag_value", v).
-			Msg("[arqbeam] Set beam flag.")
+			Msg("[arqbeam-app] Set beam flag.")
 	}
 }
