@@ -16,6 +16,8 @@ type OnFailureHook func(error)
 var (
 	onSuccess []OnSuccessHook
 	onFailure []OnFailureHook
+
+	runWithMetrics bool
 )
 
 func RegisterOnSuccessHooks(hooks ...OnSuccessHook) {
@@ -42,21 +44,35 @@ func Bootstrap(appVersion string, config BeamConfiger) {
 
 	flag.Parse()
 	beam.Init()
+
+	// Copy run configuration
+	runWithMetrics = c.Beam.WithMetrics
 }
 
 // Run
 func Run(p *beam.Pipeline) {
 	app.RunAndWait(func(ctx context.Context) error {
-		err := beamx.Run(ctx, p)
+		logger := log.With().Logger()
+
+		results, err := runPipeline(ctx, p)
+
+		if results != nil {
+			logger = logger.With().
+				Str("job_id", results.JobID()).
+				Logger()
+		}
+
 		if err != nil {
-			log.Error().Err(err).Msg("[arqbeam] Pipeline failed.")
-			for _, hook := range onFailure{
+			logger.Error().Err(err).Msg("[arqbeam-app] Pipeline failed.")
+			for _, hook := range onFailure {
 				hook(err)
 			}
+
 			return err
 		}
-		log.Info().Msg("[arqbeam] Pipeline finished.")
-		for _, hook := range onSuccess{
+
+		logger.Info().Msg("[arqbeam-app] Pipeline finished.")
+		for _, hook := range onSuccess {
 			hook()
 		}
 
@@ -64,19 +80,10 @@ func Run(p *beam.Pipeline) {
 	})
 }
 
-func RunWithMetrics(p *beam.Pipeline) {
-	app.RunAndWait(func(ctx context.Context) error {
-		results, err := beamx.RunWithMetrics(ctx, p)
-		if err != nil {
-			log.Error().Err(err).Msg("[arqbeam] Pipeline failed.")
+func runPipeline(ctx context.Context, p *beam.Pipeline) (beam.PipelineResult, error) {
+	if runWithMetrics {
+		return beamx.RunWithMetrics(ctx, p)
+	}
 
-			return err
-		}
-		log.Info().
-			Str("job_id", results.JobID()).
-			Interface("metrics", results.Metrics().AllMetrics()).
-			Msg("[arqbeam] Pipeline finished.")
-
-		return nil
-	})
+	return nil, beamx.Run(ctx, p)
 }
