@@ -2,14 +2,14 @@ module github.com/arquivei/arqbeam-app
 
 go 1.22.7
 
-toolchain go1.23.5
+toolchain go1.24.0
 
 require (
-	github.com/apache/beam/sdks/v2 v2.62.0
+	github.com/apache/beam/sdks/v2 v2.63.0
 	github.com/arquivei/go-app v1.3.0
 	github.com/rs/zerolog v1.33.0
 	github.com/stretchr/testify v1.10.0
-	golang.org/x/text v0.21.0
+	golang.org/x/text v0.22.0
 )
 
 require (
