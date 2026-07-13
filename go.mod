@@ -7,7 +7,7 @@ require (
 	github.com/arquivei/go-app v1.6.2
 	github.com/rs/zerolog v1.35.1
 	github.com/stretchr/testify v1.11.1
-	golang.org/x/text v0.39.0
+	golang.org/x/text v0.40.0
 )
 
 require (
